@@ -1,4 +1,4 @@
-﻿using Event_Sourcing_with_CQRS.Domain.Events;
+﻿using Event_Sourcing_with_CQRS.Events;
 using Event_Sourcing_with_CQRS.Infrastructure.DbContexts;
 using MediatR;
 

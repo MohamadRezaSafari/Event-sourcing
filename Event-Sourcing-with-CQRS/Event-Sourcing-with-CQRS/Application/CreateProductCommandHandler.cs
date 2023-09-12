@@ -1,6 +1,6 @@
 ﻿using Event_Sourcing_with_CQRS.Domain;
 using Event_Sourcing_with_CQRS.Domain.Commands;
-using Event_Sourcing_with_CQRS.Domain.Events;
+using Event_Sourcing_with_CQRS.Events;
 using Event_Sourcing_with_CQRS.Infrastructure.DbContexts;
 using MediatR;
 
@@ -19,11 +19,6 @@ namespace Event_Sourcing_with_CQRS.Application
 
         public async Task<int> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            if (_context.Database.CanConnect())
-            {
-
-            }
-
             var product = new Product
             {
                 Name = command.Name,

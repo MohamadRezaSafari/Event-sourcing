@@ -1,4 +1,5 @@
 using Event_Sourcing_with_CQRS.Domain.Commands;
+using Event_Sourcing_with_CQRS.EventReplay;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
