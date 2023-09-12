@@ -1,3 +1,9 @@
+using Event_Sourcing_with_CQRS.Infrastructure;
+using Event_Sourcing_with_CQRS.Infrastructure.DbContexts;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +12,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+//builder.Services.AddMediatR(typeof(Startup));
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
+builder.Services.AddDbContext<AppReadDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppReadDbContext")));
 
 var app = builder.Build();
 
