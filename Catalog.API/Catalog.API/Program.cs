@@ -1,4 +1,17 @@
+using Catalog.Application;
+using Catalog.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true)
+    .AddEnvironmentVariables();
+
+//Register Application layer and Event Store layer from Infrastructure here
+builder.Services.AddApplication().AddEventStore(builder.Configuration);
 
 // Add services to the container.
 

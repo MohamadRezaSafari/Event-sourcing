@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.API", "Catalog.API\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Application", "Catalog.Application\Catalog.Application.csproj", "{9DDF17A9-F291-4A8D-85FD-03247A0ACC28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caatalog.Infrastructure", "Caatalog.Infrastructure\Caatalog.Infrastructure.csproj", "{E224DD7D-D0D3-4666-BF0A-7AD41DA683BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Infrastructure", "Catalog.Infrastructure\Catalog.Infrastructure.csproj", "{E224DD7D-D0D3-4666-BF0A-7AD41DA683BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Domain", "Catalog.Domain\Catalog.Domain.csproj", "{5F674336-0B1E-4FBA-A50C-6172681DD0B5}"
 EndProject
