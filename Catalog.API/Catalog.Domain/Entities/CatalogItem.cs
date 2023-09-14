@@ -30,9 +30,73 @@ public class CatalogItem : BaseAggregateRoot<CatalogItem, Guid>
         AddEvent(new CatalogItemCreated(this));
     }
 
+    public static CatalogItem Create(string name, string description, double price,
+        int availableStock,int restockThreshold, int maxStockThreshold, bool onReorder)
+    {
+        return new CatalogItem(Guid.NewGuid(), name, description, price, 
+            availableStock ,restockThreshold, maxStockThreshold, onReorder);
+    }
+
+    public void Update(Guid id, string name, string description, double price, 
+        int availableStock, int restockThreshold, int maxStockThreshold, bool onReorder)
+    {
+        Id = id;
+        Name = name;
+        Description = description;
+        Price = price;
+        AvailableStock = availableStock;
+        RestockThreshold = restockThreshold;
+        MaxStockThreshold = maxStockThreshold;
+        OnReorder = onReorder;
+        
+        AddEvent(new CatalogItemUpdated(this));
+    }
+
+    public void Delete(Guid id)
+    {
+        Id = id;
+        IsDeleted = true;
+        
+        AddEvent(new CatalogItemDeleted(this));
+    }
+
     protected override void Apply(IDomainEvent<Guid> @event)
     {
-        throw new NotImplementedException();
+        switch (@event)
+        {
+            case CatalogItemCreated catalogItemCreated:
+                OnCatalogItemCreated(catalogItemCreated);
+                break;
+            case CatalogItemUpdated catalogItemUpdated:
+                OnCatalogItemUpdated(catalogItemUpdated);
+                break;
+            case CatalogItemDeleted catalogItemDeleted:
+                IsDeleted = catalogItemDeleted.IsDeleted;
+                break;
+        }
+    }
+
+    private void OnCatalogItemUpdated(CatalogItemUpdated catalogItemUpdated)
+    {
+        Name = catalogItemUpdated.Name;
+        Description = catalogItemUpdated.Description;
+        Price = catalogItemUpdated.Price;
+        AvailableStock = catalogItemUpdated.AvailableStock;
+        RestockThreshold = catalogItemUpdated.RestockThreshold;
+        MaxStockThreshold = catalogItemUpdated.MaxStockThreshold;
+        OnReorder = catalogItemUpdated.OnReorder;
+    }
+
+    private void OnCatalogItemCreated(CatalogItemCreated catalogItemCreated)
+    {
+        Id = catalogItemCreated.AggregateId;
+        Name = catalogItemCreated.Name;
+        Description= catalogItemCreated.Description;
+        Price = catalogItemCreated.Price;
+        AvailableStock = catalogItemCreated.AvailableStock;
+        RestockThreshold = catalogItemCreated.RestockThreshold;
+        MaxStockThreshold = catalogItemCreated.MaxStockThreshold;
+        OnReorder = catalogItemCreated.OnReorder;
     }
 
     public string Name { get; private set; }
