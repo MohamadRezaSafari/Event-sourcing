@@ -5,6 +5,8 @@ namespace Catalog.Domain.Entities;
 
 public class CatalogItem : BaseAggregateRoot<CatalogItem, Guid>
 {
+    private CatalogItem() { }
+
     public CatalogItem(Guid id, string name, string description,
         double price, int availableStock, int restockThreshold,
         int maxStockThreshold, bool onReorder) : base(id)
@@ -17,27 +19,27 @@ public class CatalogItem : BaseAggregateRoot<CatalogItem, Guid>
         RestockThreshold = restockThreshold;
         MaxStockThreshold = maxStockThreshold;
         OnReorder = onReorder;
-        
+
         if (Version > 0)
             throw new Exception("Catalog item already created");
-        
+
         if (string.IsNullOrEmpty(name))
             throw new Exception("Name Can not be Empty");
-        
+
         if (price <= 0)
             throw new Exception("Price must be positive value");
-        
+
         AddEvent(new CatalogItemCreated(this));
     }
 
     public static CatalogItem Create(string name, string description, double price,
-        int availableStock,int restockThreshold, int maxStockThreshold, bool onReorder)
+        int availableStock, int restockThreshold, int maxStockThreshold, bool onReorder)
     {
-        return new CatalogItem(Guid.NewGuid(), name, description, price, 
-            availableStock ,restockThreshold, maxStockThreshold, onReorder);
+        return new CatalogItem(Guid.NewGuid(), name, description, price,
+            availableStock, restockThreshold, maxStockThreshold, onReorder);
     }
 
-    public void Update(Guid id, string name, string description, double price, 
+    public void Update(Guid id, string name, string description, double price,
         int availableStock, int restockThreshold, int maxStockThreshold, bool onReorder)
     {
         Id = id;
@@ -48,7 +50,7 @@ public class CatalogItem : BaseAggregateRoot<CatalogItem, Guid>
         RestockThreshold = restockThreshold;
         MaxStockThreshold = maxStockThreshold;
         OnReorder = onReorder;
-        
+
         AddEvent(new CatalogItemUpdated(this));
     }
 
@@ -56,7 +58,7 @@ public class CatalogItem : BaseAggregateRoot<CatalogItem, Guid>
     {
         Id = id;
         IsDeleted = true;
-        
+
         AddEvent(new CatalogItemDeleted(this));
     }
 
@@ -91,7 +93,7 @@ public class CatalogItem : BaseAggregateRoot<CatalogItem, Guid>
     {
         Id = catalogItemCreated.AggregateId;
         Name = catalogItemCreated.Name;
-        Description= catalogItemCreated.Description;
+        Description = catalogItemCreated.Description;
         Price = catalogItemCreated.Price;
         AvailableStock = catalogItemCreated.AvailableStock;
         RestockThreshold = catalogItemCreated.RestockThreshold;

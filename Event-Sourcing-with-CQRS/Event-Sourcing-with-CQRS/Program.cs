@@ -23,8 +23,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
 builder.Services.AddDbContext<AppReadDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppReadDbContext")));
-builder.Services.AddDbContext<AuditLogDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AuditLogDbConnection")));
+//builder.Services.AddDbContext<AuditLogDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("AuditLogDbConnection")));
 
 
 builder.Services.AddScoped<ReplayingEventsService>();

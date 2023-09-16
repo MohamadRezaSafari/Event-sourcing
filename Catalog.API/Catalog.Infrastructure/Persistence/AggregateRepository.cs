@@ -28,6 +28,7 @@ public class AggregateRepository<TA, TKey> :
     {
         if (null == aggregate)
             throw new ArgumentNullException(nameof(aggregate));
+
         if (!aggregate.Events.Any())
             return;
 
