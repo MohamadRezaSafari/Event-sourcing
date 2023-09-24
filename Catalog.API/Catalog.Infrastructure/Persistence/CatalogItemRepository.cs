@@ -18,6 +18,13 @@ public class CatalogItemRepository : ICatalogItemRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<CatalogItem>> GetCustomersAsync()
+    {
+        var result = _context.CatalogItems.AsEnumerable();
+
+        return result;
+    }
+
     public async Task UpdateAsync(CatalogItem catalogItem)
     {
         _context.Entry(catalogItem).State =

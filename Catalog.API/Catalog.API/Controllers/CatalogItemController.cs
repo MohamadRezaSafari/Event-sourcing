@@ -17,6 +17,13 @@ public class CatalogItemController : ControllerBase
         _mediator = mediator;
     }
 
+
+    [HttpGet]
+    public async Task<IActionResult> GetCataloItems()
+    {
+        return Ok(await _mediator.Send(new GetCatalogItemsQuery()));
+    }
+
     [HttpPost("Create")]
     public async Task<IActionResult> CreateCatalogItemAsync(
         [FromBody] CreateCatalogItemDTO? dto)
